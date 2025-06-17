@@ -1,87 +1,126 @@
-# Kotlin Backend - Spring Boot + JPA
+# Kotlin Spring Boot Backend Application
 
-Este projeto é um exemplo de CRUD completo utilizando Kotlin com Spring Boot e banco de dados H2 em memória.
+A modern RESTful API built with Kotlin and Spring Boot demonstrating best practices.
 
----
+## Features
 
-## ✅ Tecnologias Utilizadas
+- RESTful API with proper response handling
+- Layered architecture (Controller, Service, Repository)
+- Entity relationships with JPA
+- Exception handling
+- CORS configuration
+- Database integration (H2 in-memory)
+- API documentation
+- Data Transfer Objects (DTOs)
+- Transactional operations
+- Lombok integration for reduced boilerplate
 
-- Kotlin 1.9
-- Spring Boot 3.1
+## Technologies
+
+- Kotlin 1.9.0
+- Spring Boot 3.1.0
 - Spring Data JPA
 - H2 Database
-- Gradle Kotlin DSL
+- Gradle with Kotlin DSL
 
----
+## Getting Started
 
-## ▶️ Como Executar
+### Prerequisites
 
-### Pré-requisitos
-- JDK 17 ou superior
-- IntelliJ IDEA (recomendado)
+- JDK 17 or later
+- Gradle 7.6+ (or use the included Gradle wrapper)
 
-### Passos para rodar:
+### Running the Application
 
-```bash
-# Navegue até o diretório do projeto
-cd backend
+1. Clone the repository
+2. Navigate to the project directory
+3. Run with Gradle:
 
-# Execute a aplicação
+```shell
 ./gradlew bootRun
 ```
 
-Ou, no IntelliJ:
-- Abra o projeto via **File > Open...**
-- Clique com o botão direito em `CrudApplication.kt` e selecione **Run**
+Or on Windows:
 
----
-
-## 🧪 Endpoints REST
-
-- `GET /users` → Lista todos os usuários
-- `POST /users` → Cria novo usuário
-  - Exemplo JSON: `{ "name": "João" }`
-- `PUT /users/{id}` → Atualiza o usuário com o ID informado
-- `DELETE /users/{id}` → Remove o usuário pelo ID
-
----
-
-## ⚙️ Configuração do Banco de Dados (H2)
-
-A aplicação usa um banco em memória H2, configurado no `application.properties`:
-
-```properties
-spring.datasource.url=jdbc:h2:mem:testdb
-spring.datasource.driverClassName=org.h2.Driver
-spring.datasource.username=sa
-spring.datasource.password=
-spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
-spring.jpa.hibernate.ddl-auto=update
-spring.h2.console.enabled=true
+```shell
+gradlew.bat bootRun
 ```
 
-> Acesse o console do H2 em: [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
+The application will be available at http://localhost:8080
 
----
+### API Endpoints
 
-## 📁 Estrutura do Projeto
+| Method | URL                       | Description            |
+|--------|---------------------------|------------------------|
+| GET    | /api/v1/users             | Get all users          |
+| GET    | /api/v1/users/{id}        | Get user by ID         |
+| POST   | /api/v1/users             | Create a new user      |
+| PUT    | /api/v1/users/{id}        | Update an existing user|
+| DELETE | /api/v1/users/{id}        | Delete a user          |
+| GET    | /api/v1/users/search      | Search users by name   |
+| GET    | /api/v1/users/recent      | Get recently added users|
+
+### H2 Console
+
+The H2 console is enabled and available at http://localhost:8080/h2-console
+
+- JDBC URL: `jdbc:h2:mem:testdb`
+- Username: `sa`
+| Password: blank
+
+## Project Structure
+
 ```
-backend/
-├── build.gradle.kts
-├── src/
-│   └── main/
-│       ├── kotlin/
-│       │   └── com/example/
-│       │       ├── CrudApplication.kt
-│       │       ├── User.kt
-│       │       ├── UserController.kt
-│       │       └── UserRepository.kt
-│       └── resources/
-│           └── application.properties
-└── README.md
+src/
+├── main/
+│   ├── kotlin/
+│   │   └── com/
+│   │       └── example/
+│   │           ├── Application.kt
+│   │           ├── AppConfig.kt
+│   │           ├── User.kt
+│   │           ├── UserController.kt
+│   │           ├── UserDto.kt
+│   │           ├── UserRepository.kt
+│   │           ├── UserService.kt
+│   │           └── GlobalExceptionHandler.kt
+│   └── resources/
+│       └── application.properties
+└── test/
+    └── kotlin/
+        └── com/
+            └── example/
+                └── UserControllerTests.kt
 ```
 
----
+## Best Practices Implemented
 
-## 📄 Licença
-Este projeto está licenciado sob a licença MIT.
+1. **Architecture**
+   - Separation of concerns (Controller, Service, Repository)
+   - Use of interfaces for loose coupling
+   - Proper exception handling
+
+2. **API Design**
+   - RESTful principles
+   - Proper HTTP status codes
+   - DTOs for request/response separation
+
+3. **Kotlin Best Practices**
+   - Immutable data classes
+   - Extension functions
+   - Null safety
+   - Function expressions
+
+4. **Performance**
+   - JPA optimizations
+   - Transaction management
+   - Connection pooling
+
+5. **Security**
+   - CORS configuration
+   - Input validation
+   - Error handling without exposing sensitive information
+
+## License
+
+This project is licensed under the MIT License
