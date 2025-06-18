@@ -95,14 +95,13 @@ class UserController(private val userService: UserService) {
             ResponseEntity.notFound().build()
         }
     }
-    
-    @Operation(summary = "Search users by name", description = "Finds users whose names match the provided search term")
+      @Operation(summary = "Search users by name", description = "Finds users whose names contain the provided search term (case insensitive)")
     @ApiResponses(value = [
         ApiResponse(responseCode = "200", description = "Successfully retrieved matching users")
     ])
     @GetMapping("/search")
     fun findByName(
-        @Parameter(description = "Name to search for") 
+        @Parameter(description = "Name pattern to search for") 
         @RequestParam name: String
     ): ResponseEntity<List<User>> =
         ResponseEntity.ok(userService.getUsersByName(name))

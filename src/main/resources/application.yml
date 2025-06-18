@@ -22,7 +22,7 @@ spring:
         web-allow-others: false
 
 server:
-  port: 8081
+  port: 8080
 
 logging:
   level:

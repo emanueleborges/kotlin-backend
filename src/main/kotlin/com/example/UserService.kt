@@ -9,10 +9,13 @@ import java.util.Optional
 class UserService(private val repository: UserRepository) {
     
     fun getAllUsers(): List<User> = repository.findAll()
+      fun getUserById(id: Long): Optional<User> = repository.findById(id)
     
-    fun getUserById(id: Long): Optional<User> = repository.findById(id)
-    
-    fun getUsersByName(name: String): List<User> = repository.findByName(name)
+    /**
+     * Search users by name pattern
+     * Changed from exact match to case-insensitive partial match
+     */
+    fun getUsersByName(name: String): List<User> = repository.findByNameContainingIgnoreCase(name)
     
     @Transactional
     fun createUser(user: User): User {
